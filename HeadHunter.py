@@ -1,11 +1,6 @@
 import requests
 import time
 
-programming_languages = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'Go', 'Scala']
-table_data = [
-    ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата', ],
-]
-
 
 def get_a_vacancies_hh(programming_language):
     vacancies = []
