@@ -3,23 +3,24 @@ import requests
 from dotenv import load_dotenv
 
 
-def get_a_vacancies_sj(programming_language):
+def get_vacancies_sj(programming_language):
     vacancies = []
+    id_moscow = 4
+    programmer_id = 48
     load_dotenv()
     headers = {
         "X-Api-App-Id": os.getenv("SUPER_JOB_TOKEN"),
     }
     params = {
-        't': 4,
-        'catalogues': 48,
+        't': id_moscow,
+        'catalogues': programmer_id,
         'keyword': programming_language,
         'count': 100
     }
     page_response = requests.get('https://api.superjob.ru/2.0/vacancies/', headers=headers, params=params)
     page_response.raise_for_status()
     page_payload = page_response.json()
-    vacancies.append(page_payload['objects'])
-    vacancies = sum(vacancies, [])
+    vacancies.extend(page_payload['objects'])
     return vacancies
 
 
