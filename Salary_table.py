@@ -1,7 +1,7 @@
 from terminaltables import AsciiTable
 from copy import deepcopy
-from SuperJob import get_vacancies_sj, predict_rub_salary_sj
-from HeadHunter import get_vacancies_hh, predict_rub_salary_hh
+from SuperJob import get_vacancies_sj, predict_rub_salaries_sj
+from HeadHunter import get_vacancies_hh, predict_rub_salaries_hh
 
 PROGRAMMING_LANGUAGES = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'Go', 'Scala']
 SALARY_TABLE = [
@@ -14,7 +14,7 @@ def get_average_salary_hh():
     table_hh = AsciiTable(table_data_hh, 'HeadHunter Moscow')
     for programming_language in PROGRAMMING_LANGUAGES:
         vacancies = get_vacancies_hh(programming_language)
-        expected_salary_hh = predict_rub_salary_hh(vacancies)
+        expected_salary_hh = predict_rub_salaries_hh(vacancies)
         if len(expected_salary_hh) == 0:
             pass
         else:
@@ -31,7 +31,7 @@ def get_average_salary_sj():
     table_sj = AsciiTable(table_data_sj, 'SuperJob Moscow')
     for programming_language in PROGRAMMING_LANGUAGES:
         vacancies = get_vacancies_sj(programming_language)
-        expected_salary_sj = predict_rub_salary_sj(vacancies)
+        expected_salary_sj = predict_rub_salaries_sj(vacancies)
         if len(expected_salary_sj) == 0:
             pass
         else:

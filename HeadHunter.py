@@ -26,21 +26,21 @@ def get_vacancies_hh(programming_language):
     return vacancies
 
 
-def predict_rub_salary_hh(vacancies):
+def predict_rub_salaries_hh(vacancies):
     expected_salary_hh = []
     for vacancy in vacancies:
         salary = vacancy['salary']
-        if salary is not None:
+        if salary:
             if salary['currency'] != 'RUR':
                 pass
             else:
-                if salary['from'] and salary['to'] is not None:
+                if salary['from'] and salary['to']:
                     average_salary = (salary['from'] + salary['to']) / 2
                     expected_salary_hh.append(average_salary)
-                elif salary['from'] is not None:
+                elif salary['from']:
                     average_salary = salary['from'] * 1.2
                     expected_salary_hh.append(average_salary)
-                elif salary['to'] is not None:
+                elif salary['to']:
                     average_salary = salary['to'] * 0.8
                     expected_salary_hh.append(average_salary)
                 else:

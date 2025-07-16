@@ -24,21 +24,21 @@ def get_vacancies_sj(programming_language):
     return vacancies
 
 
-def predict_rub_salary_sj(vacancies):
+def predict_rub_salaries_sj(vacancies):
     expected_salary_sj = []
     for vacancy in vacancies:
         salary = vacancy
-        if salary is not None:
+        if salary:
             if salary['currency'] != 'rub':
                 pass
             else:
-                if salary['payment_from'] and salary['payment_to'] is not None:
+                if salary['payment_from'] and salary['payment_to']:
                     average_salary = (salary['payment_from'] + salary['payment_to']) / 2
                     expected_salary_sj.append(average_salary)
-                elif salary['payment_from'] is not None:
+                elif salary['payment_from']:
                     average_salary = salary['payment_from'] * 1.2
                     expected_salary_sj.append(average_salary)
-                elif salary['payment_to'] is not None:
+                elif salary['payment_to']:
                     average_salary = salary['payment_to'] * 0.8
                     expected_salary_sj.append(average_salary)
                 else:
