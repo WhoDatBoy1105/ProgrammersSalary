@@ -10,6 +10,8 @@ table_data = [
 
 
 def get_average_salary_hh():
+    table_data_hh = deepcopy(table_data)
+    table_hh = AsciiTable(table_data_hh, 'HeadHunter Moscow')
     for programming_language in programming_languages:
         vacancies = get_a_vacancies_hh(programming_language)
         expected_salary_hh = predict_rub_salary_hh(vacancies)
@@ -20,13 +22,13 @@ def get_average_salary_hh():
                                  len(expected_salary_hh),
                                  int(sum(expected_salary_hh) / len(expected_salary_hh))
                                  ]
-            table_data_hh = deepcopy(table_data)
             table_data_hh.append(average_salary_hh)
-    table_hh = AsciiTable(table_data_hh, 'HeadHunter Moscow')
     print(table_hh.table)
 
 
 def get_average_salary_sj():
+    table_data_sj = deepcopy(table_data)
+    table_sj = AsciiTable(table_data_sj, 'SuperJob Moscow')
     for programming_language in programming_languages:
         vacancies = get_a_vacancies_sj(programming_language)
         expected_salary_sj = predict_rub_salary_sj(vacancies)
@@ -37,9 +39,8 @@ def get_average_salary_sj():
                                  len(expected_salary_sj),
                                  int(sum(expected_salary_sj) / len(expected_salary_sj))
                                  ]
-            table_data_sj = deepcopy(table_data)
+
             table_data_sj.append(average_salary_sj)
-    table_sj = AsciiTable(table_data_sj, 'SuperJob Moscow')
     print(table_sj.table)
 
 
