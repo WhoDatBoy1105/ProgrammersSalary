@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 from terminaltables import AsciiTable
 from copy import deepcopy
 from SuperJob import get_vacancies_sj, predict_rub_salaries_sj
@@ -37,6 +38,7 @@ def print_sj_salary_table():
 
 
 def main():
+    load_dotenv()
     print_hh_salary_table()
     print_sj_salary_table()
 
