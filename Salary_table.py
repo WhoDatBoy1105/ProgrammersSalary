@@ -5,43 +5,35 @@ from HeadHunter import get_vacancies_hh, predict_rub_salaries_hh
 
 PROGRAMMING_LANGUAGES = ['JavaScript', 'Java', 'Python', 'Ruby', 'PHP', 'C++', 'C#', 'Go', 'Scala']
 SALARY_TABLE = [
-    ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата', ],
+    ['Язык программирования', 'Вакансий найдено', 'Вакансий обработано', 'Средняя зарплата'],
 ]
 
 
-def get_average_salary_hh():
-    table_data_hh = deepcopy(SALARY_TABLE)
-    table_hh = AsciiTable(table_data_hh, 'HeadHunter Moscow')
+def create_salary_table(vacancies_getter, salary_predictor, title):
+    table_data = deepcopy(SALARY_TABLE)
     for programming_language in PROGRAMMING_LANGUAGES:
-        vacancies = get_vacancies_hh(programming_language)
-        expected_salary_hh = predict_rub_salaries_hh(vacancies)
-        if len(expected_salary_hh) == 0:
+        vacancies = vacancies_getter(programming_language)
+        predicted_salaries = salary_predictor(vacancies)
+        if not predicted_salaries:
             continue
-        else:
-            average_salary_hh = [programming_language, len(vacancies),
-                                 len(expected_salary_hh),
-                                 int(sum(expected_salary_hh) / len(expected_salary_hh))
-                                 ]
-            table_data_hh.append(average_salary_hh)
-    print(table_hh.table)
+        average_salary = int(sum(predicted_salaries) / len(predicted_salaries))
+        row = [
+            programming_language,
+            len(vacancies),
+            len(predicted_salaries),
+            average_salary
+        ]
+        table_data.append(row)
+    table = AsciiTable(table_data, title)
+    return table.table
+
+
+def get_average_salary_hh():
+    print(create_salary_table(get_vacancies_hh, predict_rub_salaries_hh, 'HeadHunter Moscow'))
 
 
 def get_average_salary_sj():
-    table_data_sj = deepcopy(SALARY_TABLE)
-    table_sj = AsciiTable(table_data_sj, 'SuperJob Moscow')
-    for programming_language in PROGRAMMING_LANGUAGES:
-        vacancies = get_vacancies_sj(programming_language)
-        expected_salary_sj = predict_rub_salaries_sj(vacancies)
-        if len(expected_salary_sj) == 0:
-            continue
-        else:
-            average_salary_sj = [programming_language, len(vacancies),
-                                 len(expected_salary_sj),
-                                 int(sum(expected_salary_sj) / len(expected_salary_sj))
-                                 ]
-
-            table_data_sj.append(average_salary_sj)
-    print(table_sj.table)
+    print(create_salary_table(get_vacancies_sj, predict_rub_salaries_sj, 'SuperJob Moscow'))
 
 
 def main():
