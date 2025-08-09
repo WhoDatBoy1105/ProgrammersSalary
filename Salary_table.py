@@ -28,17 +28,17 @@ def create_salary_table(vacancies_getter, salary_predictor, title):
     return table.table
 
 
-def get_average_salary_hh():
+def print_hh_salary_table():
     print(create_salary_table(get_vacancies_hh, predict_rub_salaries_hh, 'HeadHunter Moscow'))
 
 
-def get_average_salary_sj():
+def print_sj_salary_table():
     print(create_salary_table(get_vacancies_sj, predict_rub_salaries_sj, 'SuperJob Moscow'))
 
 
 def main():
-    get_average_salary_hh()
-    get_average_salary_sj()
+    print_hh_salary_table()
+    print_sj_salary_table()
 
 
 if __name__ == '__main__':
