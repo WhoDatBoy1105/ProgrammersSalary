@@ -1,5 +1,6 @@
 import requests
 import time
+from utils import get_receive_expected_salary
 
 
 def get_vacancies_hh(programming_language):
@@ -32,17 +33,8 @@ def predict_rub_salaries_hh(vacancies):
         salary = vacancy['salary']
         if salary:
             if salary['currency'] != 'RUR':
-                pass
+                continue
             else:
-                if salary['from'] and salary['to']:
-                    average_salary = (salary['from'] + salary['to']) / 2
-                    expected_salary_hh.append(average_salary)
-                elif salary['from']:
-                    average_salary = salary['from'] * 1.2
-                    expected_salary_hh.append(average_salary)
-                elif salary['to']:
-                    average_salary = salary['to'] * 0.8
-                    expected_salary_hh.append(average_salary)
-                else:
-                    pass
+                get_receive_expected_salary(salary_from=salary['from'], salary_to=salary['to'],
+                                            expected_salary=expected_salary_hh)
     return expected_salary_hh

@@ -1,6 +1,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+from utils import get_receive_expected_salary
 
 
 def get_vacancies_sj(programming_language):
@@ -30,17 +31,8 @@ def predict_rub_salaries_sj(vacancies):
         salary = vacancy
         if salary:
             if salary['currency'] != 'rub':
-                pass
+                continue
             else:
-                if salary['payment_from'] and salary['payment_to']:
-                    average_salary = (salary['payment_from'] + salary['payment_to']) / 2
-                    expected_salary_sj.append(average_salary)
-                elif salary['payment_from']:
-                    average_salary = salary['payment_from'] * 1.2
-                    expected_salary_sj.append(average_salary)
-                elif salary['payment_to']:
-                    average_salary = salary['payment_to'] * 0.8
-                    expected_salary_sj.append(average_salary)
-                else:
-                    pass
+                get_receive_expected_salary(salary_from=salary['payment_from'], salary_to=salary['payment_to'],
+                                            expected_salary=expected_salary_sj)
     return expected_salary_sj

@@ -16,7 +16,7 @@ def get_average_salary_hh():
         vacancies = get_vacancies_hh(programming_language)
         expected_salary_hh = predict_rub_salaries_hh(vacancies)
         if len(expected_salary_hh) == 0:
-            pass
+            continue
         else:
             average_salary_hh = [programming_language, len(vacancies),
                                  len(expected_salary_hh),
@@ -33,7 +33,7 @@ def get_average_salary_sj():
         vacancies = get_vacancies_sj(programming_language)
         expected_salary_sj = predict_rub_salaries_sj(vacancies)
         if len(expected_salary_sj) == 0:
-            pass
+            continue
         else:
             average_salary_sj = [programming_language, len(vacancies),
                                  len(expected_salary_sj),
