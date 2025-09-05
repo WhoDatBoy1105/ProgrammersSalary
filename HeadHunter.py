@@ -36,7 +36,8 @@ def predict_rub_salaries_hh(vacancies):
         if salary:
             if salary['currency'] != 'RUR':
                 continue
-            else:
-                get_receive_expected_salary(salary_from=salary['from'], salary_to=salary['to'],
-                                            expected_salary=expected_salaries_hh)
+            salary_from = salary['from']
+            salary_to = salary['to']
+            get_receive_expected_salary(salary_from, salary_to,
+                                        expected_salary=expected_salaries_hh)
     return expected_salaries_hh
