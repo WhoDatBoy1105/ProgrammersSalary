@@ -25,11 +25,9 @@ pip install -r requirements.txt
 
 ### Примеры запуска скрипта `Salary_tables.py`
 
-**Пример запуска:**
+**Для запуска:**
 
-```bash
-* python Salary_tables.py
-```
+Откройте ваш IDE и вручную запустите скрипт файла Salary_table.py
 
 **Пример вывода:**
 
