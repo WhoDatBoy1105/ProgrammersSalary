@@ -2,6 +2,8 @@ import requests
 import time
 from utils import get_receive_expected_salary
 
+HH_MOSCOW_ID = 1
+
 
 def get_vacancies_hh(programming_language):
     vacancies = []
@@ -13,7 +15,7 @@ def get_vacancies_hh(programming_language):
         payload = {
             "professional_role": programmer_id,
             "text": programming_language,
-            "area": 1,
+            "area": HH_MOSCOW_ID,
             "page": page,
             "per_page": 100
         }
