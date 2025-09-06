@@ -38,6 +38,5 @@ def predict_rub_salaries_hh(vacancies):
                 continue
             salary_from = salary['from']
             salary_to = salary['to']
-            get_receive_expected_salary(salary_from, salary_to,
-                                        expected_salary=expected_salaries_hh)
+            get_receive_expected_salary(salary_from, salary_to, expected_salary=expected_salaries_hh)
     return expected_salaries_hh
