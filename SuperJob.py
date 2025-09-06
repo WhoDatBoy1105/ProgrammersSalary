@@ -1,4 +1,5 @@
 import requests
+import time
 from utils import get_receive_expected_salary
 
 SJ_MOSCOW_ID = 4
@@ -13,12 +14,27 @@ def get_vacancies_sj(programming_language, super_job_token):
         't': SJ_MOSCOW_ID,
         'catalogues': SJ_PROGRAMMING_ID,
         'keyword': programming_language,
-        'count': 100
+        'count': 100,
+        'page': 0
     }
-    response = requests.get('https://api.superjob.ru/2.0/vacancies/', headers=headers, params=params)
-    response.raise_for_status()
-    payload = response.json()
-    return payload['objects']
+
+    vacancies = []
+    page = 0
+    more = True
+
+    while more:
+        params['page'] = page
+        response = requests.get('https://api.superjob.ru/2.0/vacancies/', headers=headers, params=params)
+        response.raise_for_status()
+        payload = response.json()
+
+        vacancies.extend(payload['objects'])
+        more = payload['more']
+        page += 1
+
+        time.sleep(0.2)
+
+    return vacancies
 
 
 def predict_rub_salaries_sj(vacancies):
