@@ -1,4 +1,5 @@
 def get_receive_expected_salary(salary_from, salary_to, expected_salary):
+    new_expected_salary = expected_salary
     average_salary = None
     if salary_from and salary_to:
         average_salary = (salary_from + salary_to) / 2
@@ -8,4 +9,4 @@ def get_receive_expected_salary(salary_from, salary_to, expected_salary):
         average_salary = salary_to * 0.8
 
     if average_salary is not None:
-        expected_salary.append(average_salary)
+        new_expected_salary.append(average_salary)
