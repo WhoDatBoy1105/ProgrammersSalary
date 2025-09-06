@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from terminaltables import AsciiTable
 from copy import deepcopy
@@ -26,20 +27,25 @@ def calculate_vacancies(vacancies_getter, salary_predictor):
             len(predicted_salaries),
             average_salary
         ]
-        table_data.append(row)  # заполеняет таблицу с ваканисями данными из ряда
+        table_data.append(row)
     return table_data
 
 
 def create_salary_table(vacancies_getter, salary_predictor, title):
     table_data = calculate_vacancies(vacancies_getter, salary_predictor)
-    table = AsciiTable(table_data, title)  # создает таблицу с уже заполненными данными
+    table = AsciiTable(table_data, title)
     return table.table
 
 
 def main():
     load_dotenv()
+    super_job_token = os.getenv("SUPER_JOB_TOKEN")
     print(create_salary_table(get_vacancies_hh, predict_rub_salaries_hh, 'HeadHunter Moscow'))
-    print(create_salary_table(get_vacancies_sj, predict_rub_salaries_sj, 'SuperJob Moscow'))
+    print(create_salary_table(
+        lambda lang: get_vacancies_sj(lang, super_job_token),
+        predict_rub_salaries_sj,
+        'SuperJob Moscow'
+    ))
 
 
 if __name__ == '__main__':
